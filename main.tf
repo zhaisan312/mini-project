@@ -9,5 +9,9 @@ module "vpc" {
   vpc_subnet_cidr2 = "10.0.2.0/24"
   az1 = "us-east-1a"
   az2 = "us-east-1b"
-
+  vpc_private_subnet_cidr1 = "10.0.3.0/24"
+  vpc_private_subnet_cidr2 = "10.0.4.0/24"
+  private_subnetname1 = "private-subnet-1"
+  private_subnetname2 = "private-subnet-2"
+  
 }

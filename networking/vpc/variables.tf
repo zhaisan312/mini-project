@@ -37,3 +37,20 @@ variable "az2" {
   description = "The availability zone for the second public subnet"
   type = string
 }
+variable "vpc_private_subnet_cidr1" {
+  description = "The CIDR block for the first private subnet"
+  type = string
+}
+
+variable "vpc_private_subnet_cidr2" {
+  description = "The CIDR block for the second private subnet"
+  type = string
+}
+variable "private_subnetname1" {
+  description = "The name of the first private subnet"
+  type = string
+}
+variable "private_subnetname2" {
+  description = "The name of the second private subnet"
+  type = string
+}
