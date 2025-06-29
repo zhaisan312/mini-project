@@ -11,3 +11,4 @@ module "vpc" {
   vpc_private_subnet_cidr2 = "10.0.4.0/24"
 
 }
+
