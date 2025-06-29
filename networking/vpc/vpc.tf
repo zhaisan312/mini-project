@@ -8,22 +8,19 @@ resource "aws_vpc" "main" {
 }
  
 # Create public subnets
-resource "public_subnets" "subnet_1" {
-  vpc_id = aws_vpc.main.id
-  cidr_block = var.vpc_subnet_cidr1
-  subnetname = var.subnetname1
+resource "aws_subnet" "public_subnet_1" {
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = var.vpc_subnet_cidr1
   availability_zone = var.az1
-
   tags = {
     Name = "${var.vpc_name}-review-app -public-1"
   }
   
 }
 
-resource "public_subnets" "subnet_2" {
-  vpc_id = aws_vpc.main.id
-  cidr_block = var.vpc_subnet_cidr2
-  subnetname = var.subnetname2
+resource "aws_subnet" "public_subnet_2" {
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = var.vpc_subnet_cidr2
   availability_zone = var.az2
 
   tags = {
@@ -33,22 +30,20 @@ resource "public_subnets" "subnet_2" {
 }
 
 # Create private subnets
-resource "private_subnets" "subnet_1" {
-  vpc_id = aws_vpc.main.id
-  cidr_block = var.vpc_private_subnet_cidr1
-  subnetname = var.private_subnetname1
-  availability_zone = var.private_az1
+resource "aws_subnet" "private_subnet_1" {
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = var.vpc_private_subnet_cidr1
+  availability_zone = var.az1
 
-  tags = {
+  tags = {  
     Name = "${var.vpc_name}-review-app-private-1"
   }
 }
 
-resource "private_subnets" "subnet_2" {
-  vpc_id = aws_vpc.main.id
-  cidr_block = var.vpc_private_subnet_cidr2
-  subnetname = var.private_subnetname2
-  availability_zone = var.private_az2
+resource "aws_subnet" "private_subnet_2" {
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = var.vpc_private_subnet_cidr2
+  availability_zone = var.az2
 
   tags = {
     Name = "${var.vpc_name}-review-app-private-2"
@@ -70,14 +65,17 @@ resource "aws_route_table" "public" {
 }
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
+    tags = {
+        Name = "${var.vpc_name}-internet-gateway"
+    }
 }
 
 resource "aws_route_table_association" "public_subnet_1" {
-  subnet_id      = public_subnets.subnet_1.id
+  subnet_id      = aws_subnet.public_subnet_1.id
   route_table_id = aws_route_table.public.id
 }
 resource "aws_route_table_association" "public_subnet_2" {
-  subnet_id      = public_subnets.subnet_2.id
+  subnet_id      = aws_subnet.public_subnet_2.id
   route_table_id = aws_route_table.public.id
 }
 
@@ -97,13 +95,17 @@ resource "aws_route_table_association" "public_subnet_2" {
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.main.id
 
+  tags = {
+    Name = "${var.vpc_name}-private-route-table"
+  }
 }
+
 resource "aws_route_table_association" "private_subnet_1" {
-  subnet_id      = private_subnets.subnet_1.id
+  subnet_id      = aws_subnet.private_subnet_1.id
   route_table_id = aws_route_table.private.id
 }
 resource "aws_route_table_association" "private_subnet_2" {
-  subnet_id      = private_subnets.subnet_2.id
+  subnet_id      = aws_subnet.private_subnet_2.id
   route_table_id = aws_route_table.private.id
 }
 resource "aws_security_group" "public_sg" {
@@ -124,5 +126,8 @@ resource "aws_security_group" "public_sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+    tags = {
+        Name = "${var.vpc_name}-public-sg"
+    }
 }
 
