@@ -65,3 +65,17 @@ resource "aws_secretsmanager_secret_version" "creds" {
   })
   
 }
+resource "aws_db_parameter_group" "rds_parameter_group" {
+  name        = "mini-project-rds-parameter-group"
+  family      = "mysql8.0"
+  description = "Parameter group for mini-project RDS instance"
+
+  parameter {
+    name  = "max_allowed_packet"
+    value = "16777216" # 16 MB
+  }
+
+  tags = {
+    Name = "mini-project-rds-parameter-group"
+  }
+}
