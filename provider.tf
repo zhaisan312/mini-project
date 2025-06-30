@@ -6,7 +6,7 @@ terraform {
     }
   }
 
-# this is remote state configuration
+  # this is remote state configuration
   backend "s3" {
     bucket = "terraform-bucket-mini-project"
     key    = "mini-project/terraform.tfstate"
