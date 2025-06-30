@@ -14,7 +14,8 @@ module "vpc" {
 
 module "rds" {
   source = "./storage/rds"
-
+  vpc_id            = module.vpc.vpc_id
+  subnet_ids        = module.vpc.public_subnet_ids
   db_identifier     = "mini-project-rds"
   engine_version    = "8.0"
   instance_class    = "db.t3.micro"

@@ -38,3 +38,12 @@ variable "db_name" {
   type        = string
 }
 
+variable "vpc_id" {
+  description = "The VPC ID where the RDS instance will be created"
+  type        = string
+  
+}
+variable "subnet_ids" {
+  description = "List of subnet IDs where the RDS instance will be created"
+  type        = list(string)
+} 
