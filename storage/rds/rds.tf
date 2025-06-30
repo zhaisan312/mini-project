@@ -79,3 +79,4 @@ resource "aws_db_parameter_group" "rds_parameter_group" {
     Name = "mini-project-rds-parameter-group"
   }
 }
+
