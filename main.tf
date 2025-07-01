@@ -34,4 +34,4 @@ module "bastion_host" {
   subnet_id  = module.vpc.public_subnet_ids[0]
   my_ip      = "10.0.0.0/16"
   key_name   = "bmb"
-}
+} 
