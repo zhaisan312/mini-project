@@ -47,3 +47,8 @@ variable "subnet_ids" {
   description = "List of subnet IDs where the RDS instance will be created"
   type        = list(string)
 } 
+
+variable "allowed_security_groups" {
+  description = "List of security group IDs allowed to access the RDS instance"
+  type        = list(string)
+}

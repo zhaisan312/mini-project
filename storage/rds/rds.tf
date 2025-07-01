@@ -17,7 +17,7 @@ resource "aws_security_group" "rds_sg" {
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    security_groups = var.allowed_security_groups # Allow traffic from specified security groups
   }
 
   egress {
