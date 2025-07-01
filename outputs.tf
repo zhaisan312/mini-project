@@ -13,5 +13,5 @@ output "bastion_host_security_group_id" {
 
 output "my_bastion_ip" {
   description = "Bastion host IP from module"
-  value       = module.bastion.bastion_public_ip
+  value       = module.bastion_host.bastion_public_ip
 }

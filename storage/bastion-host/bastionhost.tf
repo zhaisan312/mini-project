@@ -16,14 +16,17 @@ resource "aws_instance" "bastion" {
 
 data "aws_ami" "amazon_linux" {
   most_recent = true
+  owners      = ["amazon"]
 
   filter {
     name   = "name"
-    values = ["ami-000ec6c25978d5999"]
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
   }
 
-
-  owners = ["amazon"]
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
 }
 
 

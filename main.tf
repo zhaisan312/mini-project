@@ -24,7 +24,7 @@ module "rds" {
   db_username       = "admin"
   db_password       = "password1234"
   db_name           = "miniprojectdb"
-  allowed_security_groups = module.bastion_host.bastion_sg
+  allowed_security_groups = [module.bastion_host.bastion_sg]
 }
 
 module "bastion_host" {
@@ -33,5 +33,5 @@ module "bastion_host" {
   vpc_id     = module.vpc.vpc_id
   subnet_id  = module.vpc.public_subnet_ids[0]
   my_ip      = "10.0.0.0/16"
-  key_name   = "my-key-name"
+  key_name   = "bmb"
 }
